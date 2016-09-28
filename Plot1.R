@@ -1,0 +1,7 @@
+pcons <- read.table(file = "household_power_consumption.txt", sep = ";", header = TRUE)
+pcons$DTIME <- with(pcons, as.POSIXct(paste(Date, Time), format="%d/%m/%Y %H:%M:%S"))
+pset <- subset(pcons, Date %in% c('1/2/2007', '2/2/2007'))
+gap <- as.numeric(as.character(pset$Global_active_power))
+png(filename="Plot1.png", width = 480, height = 480, units = "px")
+hist(gap, col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)", breaks=12)
+dev.off()
